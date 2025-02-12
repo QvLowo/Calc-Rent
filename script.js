@@ -1,10 +1,15 @@
 document.getElementById("year").textContent = new Date().getFullYear();
 document.getElementById("month").textContent = new Date().getMonth() + 1;
 
+function sanitizeInput(value) {
+    // 只能輸入數字
+    return value.replace(/[^0-9]/g, '');
+}
+
 function calculateTotal() {
     let initial = parseFloat(document.getElementById("initial").value) || 0;
     let final = parseFloat(document.getElementById("final").value) || 0;
-    let count = final - initial;
+    let count = Math.max(0, final - initial);
     document.getElementById("count").value = count;
     document.getElementById("total").value = count * 5;
     document.getElementById("energy").value = `電費：${final} - ${initial} 為 ${count} 度 * 5 元 = ${count * 5} 元`;
